@@ -1,11 +1,12 @@
 #ifndef MESHER_MODEL_HPP__
 #define MESHER_MODEL_HPP__
 
+#include <dimension/dimension.hpp>
 #include <gmsh.h>
 #include <geometry/geometry.hpp>
 #include <string>
 
-#include "mesher-units.hpp"
+// #include "mesher-units.hpp"
 
 namespace mesher {
     using Tag   = int;
@@ -28,12 +29,12 @@ namespace mesher {
             }
 
             int
-            point(const geometry::d2::Point<Precision>& p, const millimeter& size) {
+            point(const geometry::d2::Point<Precision>& p, const dimension::millimeter& size) {
                 return gmsh::model::geo::addPoint(p.x(), p.y(), 0.0, static_cast<Precision>(size));
             }
 
             int
-            point(const geometry::d2::Point<Precision>& p, const millimeter& size, Tag tag) {
+            point(const geometry::d2::Point<Precision>& p, const dimension::millimeter& size, Tag tag) {
                 return gmsh::model::geo::addPoint(p.x(), p.y(), 0.0, static_cast<Precision>(size), tag);
             }
 

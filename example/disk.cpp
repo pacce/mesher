@@ -1,11 +1,12 @@
 #include <gmsh.h>
+#include <dimension/dimension.hpp>
 #include <mesher/mesher.hpp>
 
-using namespace mesher::literals;
+using namespace dimension::literals;
 
 int
 main(int, char**) {
-    mesher::radius              radius(50_mm);
+    dimension::radius           radius(50_mm);
     geometry::d2::Point<float>  center(0.0f, 0.0f);
     mesher::disk<float>         disk(center, radius, 16);
 

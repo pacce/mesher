@@ -1,11 +1,12 @@
 #ifndef MESHER_DISK_HPP__
 #define MESHER_DISK_HPP__
 
+#include <dimension/dimension.hpp>
 #include <geometry/geometry.hpp>
+
 #include <memory>
 #include <numeric>
 
-#include "mesher-radius.hpp"
 #include "mesher-model.hpp"
 
 namespace mesher {
@@ -14,9 +15,9 @@ namespace mesher {
         using Point = geometry::d2::Point<Precision>;
         public:
             explicit disk(
-                    const Point&            center
-                    , const mesher::radius& radius
-                    , std::size_t           electrodes
+                    const Point&                center
+                    , const dimension::radius&  radius
+                    , std::size_t               electrodes
                     ) 
                 : center_(center)
                 , radius_(radius) 
@@ -24,7 +25,7 @@ namespace mesher {
             {}
 
             void
-            operator()(std::unique_ptr<model<Precision>> model, const millimeter& size) const {
+            operator()(std::unique_ptr<model<Precision>> model, const dimension::millimeter& size) const {
                 const Precision PI          = 2.0 * std::numbers::pi_v<Precision>;
                 const Precision radius      = static_cast<Precision>(radius_);
                 const Precision electrodes  = static_cast<Precision>(electrodes_);
@@ -58,7 +59,7 @@ namespace mesher {
             }
         private:
             geometry::d2::Point<Precision>  center_;
-            mesher::radius                  radius_;
+            dimension::radius               radius_;
             std::size_t                     electrodes_;
     };
 } // namespace mesher
